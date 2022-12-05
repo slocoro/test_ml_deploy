@@ -1,0 +1,13 @@
+FROM python:3.9-slim
+
+ENV VIRTUAL_ENV=/opt/venv
+RUN python3 -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+# Install dependencies:
+COPY requirements_lint.txt .
+RUN pip install -r requirements_lint.txt
+
+COPY . ./opt/code
+
+WORKDIR ./opt/code

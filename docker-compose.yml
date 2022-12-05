@@ -1,0 +1,10 @@
+version: "2.1"
+services:
+  ml_deploy:
+    build: .
+
+  # service for linting
+  linter:
+    build:
+      context: .
+      dockerfile: Dockerfile.lint
