@@ -4,3 +4,4 @@ ipython
 uvicorn
 Pillow
 requests
+pytest
