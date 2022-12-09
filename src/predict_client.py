@@ -4,7 +4,7 @@ import requests
 
 logger = logging.getLogger(__name__)
 
-
+# TODO: add error handling
 class ModelClient(object):
     def __init__(self, url):
         self.url = url

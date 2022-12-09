@@ -1,4 +1,4 @@
-import functools
+from functools import lru_cache
 import logging
 from io import BytesIO
 
@@ -42,7 +42,7 @@ normalize_image = tf.keras.layers.Rescaling(1.0 / 255)
 
 
 # this loads the model once for the first prediction then caches it
-@functools.cache
+@lru_cache
 def load_model():
     return tf.keras.models.load_model("model/sleeve_model")
 
