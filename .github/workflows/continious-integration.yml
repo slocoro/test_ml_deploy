@@ -18,10 +18,10 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
-          make install
+          python3 -m pip install -r requirements.txt
       - name: Lint
         run: |
-          make format
+          python3 -m pip install -r requirements_lint.txt
       - name: Test
         run: |
-          make pytest
+          pytest tests/
