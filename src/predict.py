@@ -28,6 +28,9 @@ def download_image(image_url):
         return Image.open(BytesIO(r.content))
 
 
+
+
+
 def load_and_decode_image(image_url):
     logger.info("Downloading image...")
     img = download_image(image_url)
@@ -37,6 +40,7 @@ def load_and_decode_image(image_url):
 
 def add_batch_dimensions(image):
     return tf.expand_dims(image, axis=0)
+
 
 normalize_image = tf.keras.layers.Rescaling(1.0 / 255)
 
