@@ -1,4 +1,5 @@
 import functools
+import logging
 from io import BytesIO
 
 import numpy as np
@@ -7,9 +8,9 @@ import tensorflow as tf
 from fastapi import FastAPI
 from PIL import Image
 from pydantic import BaseModel
-import logging
 
 logger = logging.getLogger(__name__)
+
 
 class ImageUrl(BaseModel):
     url: str
@@ -28,7 +29,7 @@ def download_image(image_url):
 
 
 def load_and_decode_image(image_url):
-    logger.info('Downloading image...')
+    logger.info("Downloading image...")
     img = download_image(image_url)
     img = tf.convert_to_tensor(np.array(img))
     return tf.image.resize(img, [128, 128])
@@ -36,10 +37,6 @@ def load_and_decode_image(image_url):
 
 def add_batch_dimensions(image):
     return tf.expand_dims(image, axis=0)
-
-
-# def normalize_image():
-#     return tf.keras.layers.Rescaling(1.0 / 255)
 
 normalize_image = tf.keras.layers.Rescaling(1.0 / 255)
 
@@ -72,8 +69,8 @@ async def predict(image_url: ImageUrl):
         3: "class_short",
         4: "class_sleeveless",
     }
-    print('hello')
-    logger.info('Running inference...')
+    print("hello")
+    logger.info("Running inference...")
     prediction = model.predict(image, verbose=False)
     return {"prediction": class_map[prediction.argmax(axis=-1)[0]]}
 
@@ -84,8 +81,16 @@ async def predict(image_url: ImageUrl):
 # to do:
 # client code (done)
 # logging (record inputs and outputs for each prediction)
-    #  need to create logging.conf file to make it work with FastAPI
-    # add unique prediction ID to predictions
+#  need to create logging.conf file to make it work with FastAPI
+# add unique prediction ID to predictions
 # monitoring
 # github actions to push image to ecr
 # figure out how to make request using url only
+# deploy to the cloud
+# ec2 running image
+# ecs / fargate
+# api gateway + lambda (and route 53 for dns name)
+# sagemaker
+# tests for everything (try to use mock)
+# have a database attached to the system??
+# file with env variables
