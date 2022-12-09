@@ -2,6 +2,10 @@ name: Build and Push Image, Test
 
 on: [push]
 
+# instead of running steps in the build server
+# ci should push docker image to ECR and subsequent steps should pull image and run
+# commands inside container
+
 jobs:
   build:
 
@@ -23,8 +27,8 @@ jobs:
       - name: Lint
         run: |
           python3 -m pip install -r requirements_lint.txt
-          black src/
-          isort src/
+          black --check src/
+          isort --check-only src/
       - name: Test
         run: |
           pytest
