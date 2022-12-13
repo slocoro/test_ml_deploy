@@ -11,3 +11,5 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.lint
+    volumes:
+     - .:/opt/code

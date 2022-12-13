@@ -1,5 +1,6 @@
-from functools import lru_cache
 import logging
+import sys
+from functools import lru_cache
 from io import BytesIO
 
 import numpy as np
@@ -9,6 +10,8 @@ from fastapi import FastAPI
 from PIL import Image
 from pydantic import BaseModel
 
+# create logger
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
@@ -26,9 +29,6 @@ def download_image(image_url):
         r.raw.decode_content = True
 
         return Image.open(BytesIO(r.content))
-
-
-
 
 
 def load_and_decode_image(image_url):
@@ -73,7 +73,7 @@ async def predict(image_url: ImageUrl):
         3: "class_short",
         4: "class_sleeveless",
     }
-    print("hello")
+
     logger.info("Running inference...")
     prediction = model.predict(image, verbose=False)
     return {"prediction": class_map[prediction.argmax(axis=-1)[0]]}
@@ -98,3 +98,19 @@ async def predict(image_url: ImageUrl):
 # tests for everything (try to use mock)
 # have a database attached to the system??
 # file with env variables
+
+# deploy on ec2 manually:
+# https://medium.com/bb-tutorials-and-thoughts/running-docker-containers-on-aws-ec2-9b17add53646
+# (done)
+
+# have succesfully deployed on ecs fargate
+
+# command to push image to docker hub
+# 1. log into docker through cli
+# docker login --username stevensallright
+# 2. check docker images on computer
+# docker images
+# 3. take docker image ID
+# 4. tag image
+# docker tag 7ee0b36f3c32 stevensallright/test_ml_deploy-ml_deploy:latest
+# "stevensallright" is docker hub username "test_ml_deploy-ml_deploy" is repo name "latest" is tag

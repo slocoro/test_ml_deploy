@@ -6,9 +6,9 @@ build:
 
 # add -p flag when using docker-compose run because run doesn't map ports from yml file
 bash:
-	docker-compose run -p 80:80 --rm $(NAME) bash
+	docker-compose run --rm $(NAME) bash
 
-run:
+run-server:
 	docker-compose run -p 80:80 --rm $(NAME)
 
 format: ## Automatically formats code using black and isort, doesn't work right now because of permission issues on some files
