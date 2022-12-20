@@ -14,8 +14,8 @@
 # follow this for guide on how to set up api gateway with lambda function
 # https://www.youtube.com/watch?v=M91vXdjve7A
 
-import logging
 import json
+import logging
 import sys
 from io import BytesIO
 
