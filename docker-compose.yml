@@ -2,9 +2,14 @@ version: "2.1"
 services:
   ml_deploy:
     build: .
+    # use volumes to allow code changes to be reflected directly when developing
+    volumes:
+     - .:/opt/code
 
   # service for linting
   linter:
     build:
       context: .
       dockerfile: Dockerfile.lint
+    volumes:
+     - .:/opt/code
