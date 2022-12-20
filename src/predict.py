@@ -91,8 +91,9 @@ async def predict(image_url: ImageUrl):
 # github actions to push image to ecr
 # figure out how to make request using url only
 # deploy to the cloud
-# ec2 running image
-# ecs / fargate
+# ec2 running image (done)
+# ecs / fargate (done)
+# two ec2 instances with load balancer in front of them
 # api gateway + lambda (and route 53 for dns name)
 # sagemaker
 # tests for everything (try to use mock)
@@ -103,7 +104,9 @@ async def predict(image_url: ImageUrl):
 # https://medium.com/bb-tutorials-and-thoughts/running-docker-containers-on-aws-ec2-9b17add53646
 # (done)
 
-# have succesfully deployed on ecs fargate
+# deployed on ecs fargate (done)
+
+# deploy using lambda + api gateway (done)
 
 # command to push image to docker hub
 # 1. log into docker through cli
@@ -113,4 +116,5 @@ async def predict(image_url: ImageUrl):
 # 3. take docker image ID
 # 4. tag image
 # docker tag 7ee0b36f3c32 stevensallright/test_ml_deploy-ml_deploy:latest
+# docker push stevensallright/test_ml_deploy-ml_deploy
 # "stevensallright" is docker hub username "test_ml_deploy-ml_deploy" is repo name "latest" is tag

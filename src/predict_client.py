@@ -14,4 +14,7 @@ class ModelClient(object):
         logger.info("Getting inference...")
         r = requests.post(self.url + "predict/", json={"url": picture_url})
 
+        # aws lambda + api gateway
+        # r = requests.post(self.url, json={"url": picture_url})
+
         return r.content
